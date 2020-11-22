@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
-public class GornerTableCellRenderer implements TableCellRenderer{
+public class GornerTableCellRenderer implements TableCellRenderer {
     private JPanel panel = new JPanel();
     private JLabel label = new JLabel();
     // Ищем ячейки, строковое представление которых совпадает с needle
@@ -37,8 +37,7 @@ public class GornerTableCellRenderer implements TableCellRenderer{
 // Установить выравнивание надписи по левому краю панели
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
     }
-    public Component getTableCellRendererComponent(JTable table,
-                                                   Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
 // Преобразовать double в строку с помощью форматировщика
         String formattedDouble = formatter.format(value);
 // Установить текст надписи равным строковому представлению числа
@@ -53,10 +52,11 @@ public class GornerTableCellRenderer implements TableCellRenderer{
 // Иначе - в обычный белый
             panel.setBackground(Color.WHITE);
         }
+        //if()
         return panel;
     }
     public void setNeedle(String needle) {
         this.needle = needle;
     }
-
 }
+

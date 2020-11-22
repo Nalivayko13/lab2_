@@ -1,4 +1,5 @@
 package bsu.rfe.group10.lab3.Nalivayko.varB5;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,7 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame {
     // Константы с исходным размером окна приложения
     private static final int WIDTH = 700;
@@ -48,10 +49,10 @@ public class MainFrame extends JFrame {
     private JTextField textFieldStep;
     private Box hBoxResult;
     // Визуализатор ячеек таблицы
-    private GornerTableCellRenderer renderer = new GornerTableCellRenderer();
+    private GornerTableCellRenderer renderer = new
+            GornerTableCellRenderer();
     // Модель данных с результатами вычислений
     private GornerTableModel data;
-
     public MainFrame(Double[] coefficients) {
 // Обязательный вызов конструктора предка
         super("Табулирование многочлена на отрезке по схеме Горнера");
@@ -61,8 +62,8 @@ public class MainFrame extends JFrame {
         setSize(WIDTH, HEIGHT);
         Toolkit kit = Toolkit.getDefaultToolkit();
 // Отцентрировать окно приложения на экране
-        setLocation((kit.getScreenSize().width - WIDTH) / 2,
-                (kit.getScreenSize().height - HEIGHT) / 2);
+        setLocation((kit.getScreenSize().width - WIDTH)/2,
+                (kit.getScreenSize().height - HEIGHT)/2);
 // Создать меню
         JMenuBar menuBar = new JMenuBar();
 // Установить меню в качестве главного меню приложения
@@ -76,63 +77,64 @@ public class MainFrame extends JFrame {
 // Добавить его в главное меню
         menuBar.add(tableMenu);
 // Создать новое "действие" по сохранению в текстовый файл
+
         Action saveToTextAction = new AbstractAction("Сохранить в текстовый файл") {
-            public void actionPerformed(ActionEvent event) {
-                if (fileChooser == null) {
+        public void actionPerformed(ActionEvent event) {
+            if (fileChooser==null) {
 // Если экземпляр диалогового окна "Открытьфайл" ещѐ не создан,
 // то создать его
-                    fileChooser = new JFileChooser();
+                fileChooser = new JFileChooser();
 // и инициализировать текущей директорией
-                    fileChooser.setCurrentDirectory(new File("."));
-                }
+                fileChooser.setCurrentDirectory(new File("."));
+            }
 // Показать диалоговое окно
-                if (fileChooser.showSaveDialog(MainFrame.this) ==
-                        JFileChooser.APPROVE_OPTION)
+            if (fileChooser.showSaveDialog(MainFrame.this) ==
+                    JFileChooser.APPROVE_OPTION)
 // Если результат его показа успешный,
 // сохранить данные в текстовый файл
-                    saveToTextFile(fileChooser.getSelectedFile());
-            }
-        };
+                saveToTextFile(fileChooser.getSelectedFile());
+        }
+    };
 // Добавить соответствующий пункт подменю в меню "Файл"
-        saveToTextMenuItem = fileMenu.add(saveToTextAction);
+    saveToTextMenuItem = fileMenu.add(saveToTextAction);
 // По умолчанию пункт меню является недоступным (данных ещѐ нет)
-        saveToTextMenuItem.setEnabled(false);
-        // Создать новое "действие" по сохранению в текстовый файл
-        Action saveToGraphicsAction = new AbstractAction("Сохранить данные для построения графика") {
-            public void actionPerformed(ActionEvent event) {
-                if (fileChooser == null) {
+saveToTextMenuItem.setEnabled(false);
+    // Создать новое "действие" по сохранению в текстовый файл
+    Action saveToGraphicsAction = new AbstractAction("Сохранить данные для построения графика") {
+    public void actionPerformed(ActionEvent event) {
+        if (fileChooser==null) {
 // Если экземпляр диалогового окна
 // "Открыть файл" ещѐ не создан,
 // то создать его
-                    fileChooser = new JFileChooser();
+            fileChooser = new JFileChooser();
 // и инициализировать текущей директорией
-                    fileChooser.setCurrentDirectory(new File("."));
-                }
+            fileChooser.setCurrentDirectory(new File("."));
+        }
 // Показать диалоговое окно
-                if (fileChooser.showSaveDialog(MainFrame.this) ==
-                        JFileChooser.APPROVE_OPTION) ;
+        if (fileChooser.showSaveDialog(MainFrame.this) ==
+                JFileChooser.APPROVE_OPTION);
 // Если результат его показа успешный,
 // сохранить данные в двоичный файл
-                saveToGraphicsFile(
-                        fileChooser.getSelectedFile());
-            }
-        };
+        saveToGraphicsFile(
+                fileChooser.getSelectedFile());
+    }
+};
 // Добавить соответствующий пункт подменю в меню "Файл"
-        saveToGraphicsMenuItem = fileMenu.add(saveToGraphicsAction);
+saveToGraphicsMenuItem = fileMenu.add(saveToGraphicsAction);
 // По умолчанию пункт меню является недоступным(данных ещѐ нет)
         saveToGraphicsMenuItem.setEnabled(false);
 // Создать новое действие по поиску значений многочлена
         Action searchValueAction = new AbstractAction("Найти значение многочлена") {
-            public void actionPerformed(ActionEvent event) {
+public void actionPerformed(ActionEvent event) {
 // Запросить пользователя ввести искомую строку
-                String value =
-                        JOptionPane.showInputDialog(MainFrame.this, "Введите значение для поиска",
-                                "Поиск значения", JOptionPane.QUESTION_MESSAGE);
+        String value =
+        JOptionPane.showInputDialog(MainFrame.this, "Введите значение для поиска",
+        "Поиск значения", JOptionPane.QUESTION_MESSAGE);
 // Установить введенное значение в качестве иголки
-                renderer.setNeedle(value);
+        renderer.setNeedle(value);
 // Обновить таблицу
-                getContentPane().repaint();
-            }
+        getContentPane().repaint();
+        }
         };
 // Добавить действие в меню "Таблица"
         searchValueMenuItem = tableMenu.add(searchValueAction);
@@ -196,71 +198,71 @@ public class MainFrame extends JFrame {
 // Установить предпочтительный размер области равным удвоенному
 // минимальному, чтобы при компоновке область совсем не сдавили
         hboxRange.setPreferredSize(new Dimension(
-                new Double(hboxRange.getMaximumSize().getWidth()).intValue(),
-                new Double(hboxRange.getMinimumSize().getHeight()).intValue() * 2));
+        new Double(hboxRange.getMaximumSize().getWidth()).intValue(),
+        new Double(hboxRange.getMinimumSize().getHeight()).intValue()*2));
 // Установить область в верхнюю (северную) часть компоновки
         getContentPane().add(hboxRange, BorderLayout.NORTH);
 // Создать кнопку "Вычислить"
         JButton buttonCalc = new JButton("Вычислить");
 // Задать действие на нажатие "Вычислить" и привязать к кнопке
         buttonCalc.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
-                try {
+public void actionPerformed(ActionEvent ev) {
+        try {
 // Считать значения начала и конца отрезка, шага
-                    Double from =
-                            Double.parseDouble(textFieldFrom.getText());
-                    Double to =
-                            Double.parseDouble(textFieldTo.getText());
-                    Double step =
-                            Double.parseDouble(textFieldStep.getText());
+        Double from =
+        Double.parseDouble(textFieldFrom.getText());
+        Double to =
+        Double.parseDouble(textFieldTo.getText());
+        Double step =
+        Double.parseDouble(textFieldStep.getText());
 // На основе считанных данных создать новый экземпляр модели таблицы
-                    data = new GornerTableModel(from, to, step,
-                            MainFrame.this.coefficients);
+        data = new GornerTableModel(from, to, step,
+        MainFrame.this.coefficients);
 // Создать новый экземпляр таблицы
-                    JTable table = new JTable(data);
+        JTable table = new JTable(data);
 // Установить в качестве визуализатора ячеек для класса Double разработанный визуализатор
-                    table.setDefaultRenderer(Double.class,
-                            renderer);
+        table.setDefaultRenderer(Double.class,
+        renderer);
 // Установить размер строки таблицы в 30 пикселов
-                    table.setRowHeight(30);
+        table.setRowHeight(30);
 // Удалить все вложенные элементы из контейнера hBoxResult
-                    hBoxResult.removeAll();
+        hBoxResult.removeAll();
 // Добавить в hBoxResult таблицу, "обѐрнутую" в панель с полосами прокрутки
-                    hBoxResult.add(new JScrollPane(table));
+        hBoxResult.add(new JScrollPane(table));
 // Обновить область содержания главного окна
-                    getContentPane().validate();
+        getContentPane().validate();
 // Пометить ряд элементов меню как доступных
-                    saveToTextMenuItem.setEnabled(true);
-                    saveToGraphicsMenuItem.setEnabled(true);
-                    searchValueMenuItem.setEnabled(true);
-                } catch (NumberFormatException ex) {
+        saveToTextMenuItem.setEnabled(true);
+        saveToGraphicsMenuItem.setEnabled(true);
+        searchValueMenuItem.setEnabled(true);
+        } catch (NumberFormatException ex) {
 // В случае ошибки преобразования чисел показать сообщение об ошибке
-                    JOptionPane.showMessageDialog(MainFrame.this,
-                            "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            }
+        JOptionPane.showMessageDialog(MainFrame.this,
+        "Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
+        JOptionPane.WARNING_MESSAGE);
+        }
+        }
         });
 // Создать кнопку "Очистить поля"
         JButton buttonReset = new JButton("Очистить поля");
 // Задать действие на нажатие "Очистить поля" и привязать к кнопке
         buttonReset.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ev) {
+public void actionPerformed(ActionEvent ev) {
 // Установить в полях ввода значения по умолчанию
-                textFieldFrom.setText("0.0");
-                textFieldTo.setText("1.0");
-                textFieldStep.setText("0.1");
+        textFieldFrom.setText("0.0");
+        textFieldTo.setText("1.0");
+        textFieldStep.setText("0.1");
 // Удалить все вложенные элементы контейнера hBoxResult
-                hBoxResult.removeAll();
+        hBoxResult.removeAll();
 // Добавить в контейнер пустую панель
-                hBoxResult.add(new JPanel());
+        hBoxResult.add(new JPanel());
 // Пометить элементы меню как недоступные
-                saveToTextMenuItem.setEnabled(false);
-                saveToGraphicsMenuItem.setEnabled(false);
-                searchValueMenuItem.setEnabled(false);
+        saveToTextMenuItem.setEnabled(false);
+        saveToGraphicsMenuItem.setEnabled(false);
+        searchValueMenuItem.setEnabled(false);
 // Обновить область содержания главного окна
-                getContentPane().validate();
-            }
+        getContentPane().validate();
+        }
         });
 // Поместить созданные кнопки в контейнер
         Box hboxButtons = Box.createHorizontalBox();
@@ -270,66 +272,63 @@ public class MainFrame extends JFrame {
         hboxButtons.add(Box.createHorizontalStrut(30));
         hboxButtons.add(buttonReset);
         hboxButtons.add(Box.createHorizontalGlue());
-// Установить предпочтительный размер области равным удвоенному минимальному, чтобы при
+// Установить предпочтительный размер области равным удвоенном минимальному, чтобы при
 // компоновке окна область совсем не сдавили
         hboxButtons.setPreferredSize(new Dimension(new
-                Double(hboxButtons.getMaximumSize().getWidth()).intValue(), new
-                Double(hboxButtons.getMinimumSize().getHeight()).intValue() * 2));
-// Разместить контейнер с кнопками в нижней (южной) области граничной компоновки
+        Double(hboxButtons.getMaximumSize().getWidth()).intValue(), new
+        Double(hboxButtons.getMinimumSize().getHeight()).intValue()*2));
+// Разместить контейнер с кнопками в нижней (южной) область граничной компоновки
         getContentPane().add(hboxButtons, BorderLayout.SOUTH);
 // Область для вывода результата пока что пустая
         hBoxResult = Box.createHorizontalBox();
         hBoxResult.add(new JPanel());
 // Установить контейнер hBoxResult в главной (центральной) области граничной компоновки
         getContentPane().add(hBoxResult, BorderLayout.CENTER);
-    }
-
-    protected void saveToGraphicsFile(File selectedFile) {
+        }
+protected void saveToGraphicsFile(File selectedFile) {
         try {
-// Создать новый байтовый поток вывода, направленный в указанный файл
-            DataOutputStream out = new DataOutputStream(new
-                    FileOutputStream(selectedFile));
+// Создать новый байтовый поток вывода, направленный указанный файл
+        DataOutputStream out = new DataOutputStream(new
+        FileOutputStream(selectedFile));
 // Записать в поток вывода попарно значение X в точке, значение многочлена в точке
-            for (int i = 0; i < data.getRowCount(); i++) {
-                out.writeDouble((Double) data.getValueAt(i, 0));
-                out.writeDouble((Double) data.getValueAt(i, 1));
-            }
+        for (int i = 0; i<data.getRowCount(); i++) {
+        out.writeDouble((Double)data.getValueAt(i,0));
+        out.writeDouble((Double)data.getValueAt(i,1));
+        }
 // Закрыть поток вывода
-            out.close();
+        out.close();
         } catch (Exception e) {
 // Исключительную ситуацию "ФайлНеНайден" в данном случае можно не обрабатывать,
 // так как мы файл создаѐм, а не открываем для чтения
         }
-    }
-
-    protected void saveToTextFile(File selectedFile) {
-        try {
+        }
+protected void saveToTextFile(File selectedFile) {
+    try {
 // Создать новый символьный поток вывода, направленный в указанный файл
-            PrintStream out = new PrintStream(selectedFile);
+        PrintStream out = new PrintStream(selectedFile);
 // Записать в поток вывода заголовочные сведения
-            out.println("Результаты табулирования многочлена по схеме  Горнера");
-            out.print("Многочлен: ");
-            for (int i = 0; i < coefficients.length; i++) {
-                out.print(coefficients[i] + "*X^" +
-                        (coefficients.length - i - 1));
-                if (i != coefficients.length - 1)
-                    out.print(" + ");
-            }
-            out.println("");
-            out.println("Интервал от " + data.getFrom() + " до " +
-                    data.getTo() + " с шагом " + data.getStep());
-            out.println("====================================================");
+        out.println("Результаты табулирования многочлена по схеме Горнера");
+        out.print("Многочлен: ");
+        for (int i = 0; i < coefficients.length; i++) {
+            out.print(coefficients[i] + "*X^" +
+                    (coefficients.length - i - 1));
+            if (i != coefficients.length - 1)
+                out.print(" + ");
+        }
+        out.println("");
+        out.println("Интервал от " + data.getFrom() + " до " +
+                data.getTo() + " с шагом " + data.getStep());
+        out.println("====================================================");
 // Записать в поток вывода значения в точках
-            for (int i = 0; i < data.getRowCount(); i++) {
-                out.println("Значение в точке " + data.getValueAt(i, 0)
-                        + " равно " + data.getValueAt(i, 1));
-            }
+        for (int i = 0; i < data.getRowCount(); i++) {
+            out.println("Значение в точке " + data.getValueAt(i, 0)
+                    + " равно " + data.getValueAt(i, 1));
+        }
 // Закрыть поток
-            out.close();
-        } catch (FileNotFoundException e) {
+        out.close();
+    } catch (FileNotFoundException e) {
 // Исключительную ситуацию "ФайлНеНайден" можно не
 // обрабатывать, так как мы файл создаѐм, а не открываем
-        }
-
     }
-}
+} }
+
