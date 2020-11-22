@@ -11,22 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
+
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
     // Константы с исходным размером окна приложения
@@ -48,6 +34,7 @@ public class MainFrame extends JFrame {
     private JTextField textFieldTo;
     private JTextField textFieldStep;
     private Box hBoxResult;
+    private JMenuItem aboutProgramMenuItem;
     // Визуализатор ячеек таблицы
     private GornerTableCellRenderer renderer = new
             GornerTableCellRenderer();
@@ -76,6 +63,10 @@ public class MainFrame extends JFrame {
         JMenu tableMenu = new JMenu("Таблица");
 // Добавить его в главное меню
         menuBar.add(tableMenu);
+
+        JMenu helpMenu =new JMenu("Справка");
+        menuBar.add(helpMenu);
+
 // Создать новое "действие" по сохранению в текстовый файл
 
         Action saveToTextAction = new AbstractAction("Сохранить в текстовый файл") {
@@ -99,7 +90,25 @@ public class MainFrame extends JFrame {
     saveToTextMenuItem = fileMenu.add(saveToTextAction);
 // По умолчанию пункт меню является недоступным (данных ещѐ нет)
 saveToTextMenuItem.setEnabled(false);
-    // Создать новое "действие" по сохранению в текстовый файл
+
+// Cоздать новое действие по выводу дилогового окна с информацией автора
+        Action aboutProgramAction = new AbstractAction("О программе") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ImageIcon icon=new ImageIcon(kit.getImage("C:\\study\\Java\\lab3 - more Opptions in GUI\\my_photo.jpg"));
+                JOptionPane.showMessageDialog(MainFrame.this,
+                        new String[]{"Наливайко Полина","10 группа"},
+                        "О программе",JOptionPane.INFORMATION_MESSAGE,icon);
+            }
+        };
+        // Добавление в меню
+        aboutProgramMenuItem=helpMenu.add(aboutProgramAction);
+        aboutProgramMenuItem.setEnabled(true);
+
+
+
+
+        // Создать новое "действие" по сохранению в текстовый файл
     Action saveToGraphicsAction = new AbstractAction("Сохранить данные для построения графика") {
     public void actionPerformed(ActionEvent event) {
         if (fileChooser==null) {
@@ -285,6 +294,8 @@ public void actionPerformed(ActionEvent ev) {
 // Установить контейнер hBoxResult в главной (центральной) области граничной компоновки
         getContentPane().add(hBoxResult, BorderLayout.CENTER);
         }
+
+
 protected void saveToGraphicsFile(File selectedFile) {
         try {
 // Создать новый байтовый поток вывода, направленный указанный файл
@@ -324,6 +335,9 @@ protected void saveToTextFile(File selectedFile) {
             out.println("Значение в точке " + data.getValueAt(i, 0)
                     + " равно " + data.getValueAt(i, 1));
         }
+
+
+
 // Закрыть поток
         out.close();
     } catch (FileNotFoundException e) {
