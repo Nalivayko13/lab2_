@@ -40,6 +40,8 @@ public class GornerTableCellRenderer implements TableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
 // Преобразовать double в строку с помощью форматировщика
         String formattedDouble = formatter.format(value);
+
+
 // Установить текст надписи равным строковому представлению числа
         label.setText(formattedDouble);
         if (col==1 && needle!=null && needle.equals(formattedDouble)) {
@@ -52,7 +54,11 @@ public class GornerTableCellRenderer implements TableCellRenderer {
 // Иначе - в обычный белый
             panel.setBackground(Color.WHITE);
         }
+        if(formattedDouble.contains("1")||formattedDouble.contains("3")||formattedDouble.contains("5")){
+
+            panel.setBackground(Color.ORANGE);}
         return panel;
+
     }
     public void setNeedle(String needle) {
         this.needle = needle;
