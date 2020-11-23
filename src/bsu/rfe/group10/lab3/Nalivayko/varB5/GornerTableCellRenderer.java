@@ -41,6 +41,12 @@ public class GornerTableCellRenderer implements TableCellRenderer {
 // Преобразовать double в строку с помощью форматировщика
         String formattedDouble = formatter.format(value);
 
+        int index = formattedDouble.indexOf('.');
+        int index1=formattedDouble.indexOf('1',index);
+        int index3=formattedDouble.indexOf('3',index);
+        int index5=formattedDouble.indexOf('5',index);
+        //String sub=formattedDouble.substring(index+1);
+        //System.out.println(sub);
 
 // Установить текст надписи равным строковому представлению числа
         label.setText(formattedDouble);
@@ -54,9 +60,10 @@ public class GornerTableCellRenderer implements TableCellRenderer {
 // Иначе - в обычный белый
             panel.setBackground(Color.WHITE);
         }
-        if(formattedDouble.contains("1")||formattedDouble.contains("3")||formattedDouble.contains("5")){
 
-            panel.setBackground(Color.ORANGE);}
+        if(index1!=-1||index3!=-1||index5!=-1) panel.setBackground(Color.ORANGE);
+        //if(sub.contains("1")||sub.contains("3")||sub.contains("5")){
+        //   panel.setBackground(Color.ORANGE);}
         return panel;
 
     }
